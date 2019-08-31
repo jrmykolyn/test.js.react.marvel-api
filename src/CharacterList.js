@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { CharacterSummary } from './CharacterSummary';
+import { CharacterCard } from './CharacterCard';
 import { NoCharacters } from './NoCharacters';
 import { Loading } from './Loading';
 
@@ -8,7 +8,7 @@ export class CharacterList extends Component {
     const characterElems = this.props.characters.length
       ? this.props.characters.map((character) => {
         return (
-          <CharacterSummary
+          <CharacterCard
             character={ character }
             onClick={ () => this.props.onCharacterClick(character.id) }
           />

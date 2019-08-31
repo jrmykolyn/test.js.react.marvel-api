@@ -9,6 +9,7 @@ export class CharacterList extends Component {
       ? this.props.characters.map((character) => {
         return (
           <CharacterCard
+            key={ character.id }
             character={ character }
             onClick={ () => this.props.onCharacterClick(character.id) }
           />

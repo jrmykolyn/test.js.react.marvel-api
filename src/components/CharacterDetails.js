@@ -16,7 +16,7 @@ export class CharacterDetails extends Component {
           <p>{ this.props.character.description }</p>
           <p><strong>Links:</strong></p>
           <ul>
-            { this.props.character.urls.map(({ url, type }) =><li><a href={ url } target="_blank" rel="noopener noreferrer">{ type }</a></li>) }
+            { this.props.character.urls.map(({ url, type }, i) => <li key={ i }><a href={ url } target="_blank" rel="noopener noreferrer">{ type }</a></li>) }
           </ul>
           <button onClick={ this.props.onClose }></button>
         </div>

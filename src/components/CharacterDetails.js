@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 
 export class CharacterDetails extends Component {
   render() {
-    console.log(this.props.character);
-
     return (
       <article className="character-details">
         <div className="character-details__backdrop"></div>

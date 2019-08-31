@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
-import { CharacterList } from './CharacterList';
-import { CharacterDetails } from './CharacterDetails';
-import { SearchBar } from './SearchBar';
+import { CharacterList } from './components/CharacterList';
+import { CharacterDetails } from './components/CharacterDetails';
+import { SearchBar } from './components/SearchBar';
 import { MarvelService } from './services/MarvelService';
 
 class App extends Component {

@@ -10,7 +10,7 @@ export class SearchTypeControls extends Component {
             name="searchType"
             type="radio"
             checked={ this.props.searchType === 'Characters' }
-            onClick={ this.props.onCharactersClick }
+            onChange={ this.props.onCharactersClick }
           />
           <span>Characters</span>
         </label>
@@ -20,7 +20,7 @@ export class SearchTypeControls extends Component {
             name="searchType"
             type="radio"
             checked={ this.props.searchType === 'Comics' }
-            onClick={ this.props.onComicsClick }
+            onChange={ this.props.onComicsClick }
           />
           <span>Comics</span>
         </label>

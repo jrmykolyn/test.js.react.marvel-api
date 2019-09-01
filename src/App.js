@@ -166,8 +166,8 @@ class App extends Component {
       && (searchTerm !== prevSearchTerm || searchType !== prevSearchType)
     ) {
       return searchType  === 'Characters'
-        ? this.fetchCharacters({ nameStartsWith: searchTerm })
-        : this.fetchComics({ titleStartsWith: searchTerm });
+        ? this.fetchCharacters()
+        : this.fetchComics();
     }
   }
 
@@ -190,10 +190,10 @@ class App extends Component {
   //
   // If the request fails, the error message is printed to the console and the
   // `hasError` property of the application state is set to true.
-  fetchCharacters(params = {}) {
+  fetchCharacters() {
     this.setState({ isLoading: true, hasError: false });
 
-    return this.marvelService.getCharacters(params)
+    return this.marvelService.getCharacters({ nameStartsWith: this.state.searchTerm })
       .then((data) => this.setState({
         results: data.results,
         isLoading: false,
@@ -218,7 +218,7 @@ class App extends Component {
   // an offset value of 20. The response for the second request will exclude
   // the first 20 results, which means that there will not be an overlap between
   // the items returned by the first and second responses.
-  fetchMoreCharacters(config = {}) {
+  fetchMoreCharacters() {
     this.setState({ isLoadingMore: true });
 
     return this.marvelService.getCharacters({
@@ -247,8 +247,8 @@ class App extends Component {
   // be displayed as part of the subsequent render.
   //
   // If the request is unsuccessful, we print the error message to the console.
-  fetchCharacter(id, config = {}) {
-    return this.marvelService.getCharacter(id, config)
+  fetchCharacter(id) {
+    return this.marvelService.getCharacter(id)
       .then((data) => this.setState({ selectedResult: data.results[0] }))
       .catch((err) => console.error(err));
   }
@@ -267,10 +267,10 @@ class App extends Component {
   //
   // Each method also makes use of the `marvelService`, and updates the
   // `isLoading`, `isLoadingMore`, and `hasError` properties as necessary.
-  fetchComics(params) {
+  fetchComics() {
     this.setState({ isLoading: true, hasError: false });
 
-    this.marvelService.getComics(params)
+    this.marvelService.getComics({ titleStartsWith: this.state.searchTerm })
       .then((data) => console.log(data) || this.setState({
         results: data.results,
         isLoading: false,
@@ -282,7 +282,7 @@ class App extends Component {
       });
   }
 
-  fetchMoreComics(params) {
+  fetchMoreComics() {
     this.setState({ isLoadingMore: true });
 
     return this.marvelService.getComics({
@@ -300,8 +300,8 @@ class App extends Component {
       });
   }
 
-  fetchComic(id, config = {}) {
-    return this.marvelService.getComic(id, config)
+  fetchComic(id) {
+    return this.marvelService.getComic(id)
       .then((data) => this.setState({ selectedResult: data.results[0] }))
       .catch((err) => console.error(err));
   }

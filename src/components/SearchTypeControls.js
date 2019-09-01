@@ -4,7 +4,7 @@ export class SearchTypeControls extends Component {
   render() {
     return (
       <div className="search-type-controls">
-        <label for="selectCharacters">
+        <label htmlFor="selectCharacters">
           <input
             id="selectCharacters"
             name="searchType"
@@ -14,7 +14,7 @@ export class SearchTypeControls extends Component {
           />
           <span>Characters</span>
         </label>
-        <label for="selectComics">
+        <label htmlFor="selectComics">
           <input
             id="selectComics"
             name="searchType"

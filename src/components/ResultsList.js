@@ -4,7 +4,7 @@ import { NoResults } from './NoResults';
 
 export class ResultsList extends Component {
   render() {
-    const results = this.props.results.length
+    const resultsElems = this.props.results.length
       ? this.props.results.map((result) => {
         return (
           <ResultCard
@@ -20,7 +20,7 @@ export class ResultsList extends Component {
 
     return (
       <section className="results-list">
-        { results }
+        { resultsElems }
       </section>
     );
   }

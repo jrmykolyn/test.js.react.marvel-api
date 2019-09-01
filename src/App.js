@@ -27,9 +27,6 @@ class App extends Component {
     this.fetchMoreCharacters = this.fetchMoreCharacters.bind(this);
     this.fetchCharacter = this.fetchCharacter.bind(this);
 
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleSelect = this.handleSelect.bind(this);
-
     this.marvelService = new MarvelService({
       apiKey: this.props.apiKey,
     });
@@ -71,22 +68,14 @@ class App extends Component {
         <SearchBar
           searchTerm={ this.state.searchTerm }
           searchType={ this.state.searchType }
-          onSubmit={ this.handleSubmit }
-          onSelect={ this.handleSelect  }
+          onSubmit={ (searchTerm) => this.setState({ searchTerm }) }
+          onSelect={ (searchType) => this.setState({ searchType }) }
         />
         { resultsElem }
         { loadMoreElem }
         { detailsElem }
       </section>
     );
-  }
-
-  handleSubmit(searchTerm) {
-    this.setState({ searchTerm });
-  }
-
-  handleSelect(searchType) {
-    this.setState({ searchType });
   }
 
   componentDidUpdate(_, prevState) {

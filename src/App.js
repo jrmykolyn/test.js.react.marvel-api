@@ -59,7 +59,12 @@ class App extends Component {
           />
         );
 
-    const loadMoreElem = this.state.canLoadMore && !this.state.error && !this.state.isLoadingMore
+    const loadMoreElem = (
+      this.state.canLoadMore
+      && !this.state.error
+      && !this.state.isLoading
+      && !this.state.isLoadingMore
+    )
       ? <LoadMore onClick={ this.state.searchType === 'Characters' ? this.fetchMoreCharacters : this.fetchMoreComics } />
       : '';
 

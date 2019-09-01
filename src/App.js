@@ -19,13 +19,13 @@ class App extends Component {
       selectedResult: null,
     };
 
-    this.fetchComics = this.fetchComics.bind(this);
-    this.fetchMoreComics = this.fetchMoreComics.bind(this);
-    this.fetchComic = this.fetchComic.bind(this);
-
     this.fetchCharacters = this.fetchCharacters.bind(this);
     this.fetchMoreCharacters = this.fetchMoreCharacters.bind(this);
     this.fetchCharacter = this.fetchCharacter.bind(this);
+
+    this.fetchComics = this.fetchComics.bind(this);
+    this.fetchMoreComics = this.fetchMoreComics.bind(this);
+    this.fetchComic = this.fetchComic.bind(this);
 
     this.marvelService = new MarvelService({
       apiKey: this.props.apiKey,
@@ -94,42 +94,6 @@ class App extends Component {
     }
   }
 
-  fetchComics(params) {
-    this.setState({ isLoading: true, hasError: false });
-
-    this.marvelService.getComics(params)
-      .then((data) => console.log(data) || this.setState({
-        results: data.results,
-        isLoading: false,
-        canLoadMore: data.total > (data.offset + data.count),
-      }));
-  }
-
-  fetchMoreComics(params) {
-    this.setState({ isLoadingMore: true });
-
-    return this.marvelService.getComics({
-      titleStartsWith: this.state.searchTerm,
-      offset: this.state.results.length,
-    })
-      .then((data) => this.setState({
-        results: [...this.state.results, ...data.results],
-        isLoading: false,
-        isLoadingMore: false,
-        canLoadMore: data.total > (data.offset + data.count),
-      }))
-      .catch((err) => {
-        console.log(err);
-        this.setState({ hasError: true });
-      });
-  }
-
-  fetchComic(id, config = {}) {
-    return this.marvelService.getComic(id, config)
-      .then((data) => this.setState({ selectedResult: data.results[0] }))
-      .catch((err) => console.error(err));
-  }
-
   fetchCharacters(params = {}) {
     this.setState({ isLoading: true, hasError: false });
 
@@ -166,6 +130,42 @@ class App extends Component {
 
   fetchCharacter(id, config = {}) {
     return this.marvelService.getCharacter(id, config)
+      .then((data) => this.setState({ selectedResult: data.results[0] }))
+      .catch((err) => console.error(err));
+  }
+
+  fetchComics(params) {
+    this.setState({ isLoading: true, hasError: false });
+
+    this.marvelService.getComics(params)
+      .then((data) => console.log(data) || this.setState({
+        results: data.results,
+        isLoading: false,
+        canLoadMore: data.total > (data.offset + data.count),
+      }));
+  }
+
+  fetchMoreComics(params) {
+    this.setState({ isLoadingMore: true });
+
+    return this.marvelService.getComics({
+      titleStartsWith: this.state.searchTerm,
+      offset: this.state.results.length,
+    })
+      .then((data) => this.setState({
+        results: [...this.state.results, ...data.results],
+        isLoading: false,
+        isLoadingMore: false,
+        canLoadMore: data.total > (data.offset + data.count),
+      }))
+      .catch((err) => {
+        console.log(err);
+        this.setState({ hasError: true });
+      });
+  }
+
+  fetchComic(id, config = {}) {
+    return this.marvelService.getComic(id, config)
       .then((data) => this.setState({ selectedResult: data.results[0] }))
       .catch((err) => console.error(err));
   }

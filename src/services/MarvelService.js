@@ -16,26 +16,19 @@ export class MarvelService {
     return { apikey: this.apiKey };
   }
 
-  encodeParams(params = {}) {
-    return Object.keys(params)
-      .map((key) => [key, params[key]])
-      .map((tuple) => tuple.join('='))
-      .join('&');
-  }
-
   getCharacters(config = {}) {
-    const params = this.encodeParams({ ...config, ...this.getAuthConfig() });
-    const endpoint = MarvelService.ENDPOINTS.characters + '?' + params;
+    const params = { ...config, ...this.getAuthConfig() };
+    const endpoint = MarvelService.ENDPOINTS.characters;
 
-    return axios.get(endpoint)
+    return axios.get(endpoint, { params })
       .then((response) => response.data.data);
   }
 
   getCharacter(id, config = {}) {
-    const params = this.encodeParams({ ...config, ...this.getAuthConfig() });
-    const endpoint = MarvelService.ENDPOINTS.character + '/'  + id + '?' + params;
+    const params = { ...config, ...this.getAuthConfig() };
+    const endpoint = `${MarvelService.ENDPOINTS.character}/${id}`;
 
-    return axios.get(endpoint)
+    return axios.get(endpoint, { params })
       .then((response) => response.data.data);
   }
 }

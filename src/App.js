@@ -110,7 +110,7 @@ class App extends Component {
       }))
       .catch((err) => {
         console.error(err);
-        this.setState({ hasError: true });
+        this.setState({ isLoading: false, hasError: true });
       });
   }
 
@@ -123,13 +123,12 @@ class App extends Component {
     })
       .then((data) => this.setState({
         results: [...this.state.results, ...data.results],
-        isLoading: false,
         isLoadingMore: false,
         canLoadMore: data.total > (data.offset + data.count),
       }))
       .catch((err) => {
         console.error(err);
-        this.setState({ hasError: true });
+        this.setState({ isLoadingMore: false, hasError: true });
       });
   }
 
@@ -147,7 +146,11 @@ class App extends Component {
         results: data.results,
         isLoading: false,
         canLoadMore: data.total > (data.offset + data.count),
-      }));
+      }))
+      .catch((err) => {
+        console.log(err);
+        this.setState({ isLoading: false, hasError: true });
+      });
   }
 
   fetchMoreComics(params) {
@@ -159,13 +162,12 @@ class App extends Component {
     })
       .then((data) => this.setState({
         results: [...this.state.results, ...data.results],
-        isLoading: false,
         isLoadingMore: false,
         canLoadMore: data.total > (data.offset + data.count),
       }))
       .catch((err) => {
         console.log(err);
-        this.setState({ hasError: true });
+        this.setState({ isLoading: false, hasError: true });
       });
   }
 

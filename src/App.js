@@ -58,13 +58,16 @@ class App extends Component {
       (this.state.searchTerm)
       && (this.state.searchTerm !== prevState.searchTerm)
     ) {
-      this.fetchCharacters({ nameStartsWith: this.state.searchTerm });
-      this.setState({ isLoading: true });
+      this.fetchCharacters();
     }
   }
 
-  fetchCharacters(config = {}) {
-    return this.marvelService.getCharacters(config)
+  fetchCharacters() {
+    this.setState({ isLoading: true });
+
+    return this.marvelService.getCharacters({
+      nameStartsWith: this.state.searchTerm,
+    })
       .then((data) => this.setState({
         characters: data.results,
         isLoading: false,

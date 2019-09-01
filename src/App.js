@@ -71,7 +71,7 @@ class App extends Component {
             results={ this.state.results }
             searchTerm={ this.state.searchTerm }
             searchType={ this.state.searchType }
-            onResultClick={ this.state.searchType === 'Characters' ? this.fetchCharacter : this.fetchComic  }
+            onResultClick={ this.state.searchType === 'Characters' ? this.fetchCharacter : this.fetchComic }
           />
         );
 

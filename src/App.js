@@ -12,7 +12,7 @@ class App extends Component {
   // --------------------------------------------------
   // SETUP
   // --------------------------------------------------
-  // Winthin our constructor, we:
+  // Within our constructor, we:
   // - Set up the initial state of the application.
   // - Bind the App methods so that they can be used in child components.
   // - Instantiate the `MarvelService`.

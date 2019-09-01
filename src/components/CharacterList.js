@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { CharacterCard } from './CharacterCard';
 import { NoCharacters } from './NoCharacters';
+import { LoadMore } from './LoadMore';
 import { Loading } from './Loading';
 
 export class CharacterList extends Component {
@@ -21,9 +22,14 @@ export class CharacterList extends Component {
       ? <Loading searchTerm={ this.props.searchTerm } />
       : characterElems;
 
+    const loadMore = this.props.canLoadMore
+      ? <LoadMore onClick={ this.props.onLoadMoreClick } />
+      : '';
+
     return (
       <section className="character-list">
         { content }
+        { loadMore }
       </section>
     );
   }

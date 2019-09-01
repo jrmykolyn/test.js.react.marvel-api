@@ -16,6 +16,7 @@ class App extends Component {
     };
 
     this.fetchCharacters = this.fetchCharacters.bind(this);
+    this.fetchMoreCharacters = this.fetchMoreCharacters.bind(this);
     this.fetchCharacter = this.fetchCharacter.bind(this);
 
     this.marvelService = new MarvelService({
@@ -43,7 +44,9 @@ class App extends Component {
           characters={ this.state.characters }
           searchTerm={ this.state.searchTerm }
           isLoading={ this.state.isLoading }
+          canLoadMore={ this.state.canLoadMore }
           onCharacterClick={ this.fetchCharacter }
+          onLoadMoreClick={ this.fetchMoreCharacters }
         />
         { detailsElem }
       </section>
@@ -62,8 +65,25 @@ class App extends Component {
 
   fetchCharacters(config = {}) {
     return this.marvelService.getCharacters(config)
-      .then((data) => this.setState({ characters: data.results, isLoading: false }))
+      .then((data) => this.setState({
+        characters: data.results,
+        isLoading: false,
+        canLoadMore: data.total > (data.offset + data.count),
+      }))
       .catch((err) => console.error(err));
+  }
+
+  fetchMoreCharacters(config = {}) {
+    return this.marvelService.getCharacters({
+      nameStartsWith: this.state.searchTerm,
+      offset: this.state.characters.length
+    })
+      .then((data) => this.setState({
+        characters: [...this.state.characters, ...data.results],
+        isLoading: false,
+        canLoadMore: data.total > (data.offset + data.count),
+      }))
+      .catch((err) => console.log(err));
   }
 
   fetchCharacter(id, config = {}) {

@@ -3,6 +3,7 @@ import './App.css';
 import { CharacterList } from './components/CharacterList';
 import { CharacterDetails } from './components/CharacterDetails';
 import { SearchBar } from './components/SearchBar';
+import { Error } from './components/Error';
 import { MarvelService } from './services/MarvelService';
 
 class App extends Component {
@@ -34,12 +35,9 @@ class App extends Component {
       )
       : '';
 
-    return (
-      <section>
-        <SearchBar
-          searchTerm={ this.state.searchTerm }
-          onSubmit={ (searchTerm) => this.setState({ searchTerm })}
-        />
+    const content = this.state.hasError
+      ? <Error />
+      : (
         <CharacterList
           characters={ this.state.characters }
           searchTerm={ this.state.searchTerm }
@@ -48,6 +46,15 @@ class App extends Component {
           onCharacterClick={ this.fetchCharacter }
           onLoadMoreClick={ this.fetchMoreCharacters }
         />
+      );
+
+    return (
+      <section>
+        <SearchBar
+          searchTerm={ this.state.searchTerm }
+          onSubmit={ (searchTerm) => this.setState({ searchTerm })}
+        />
+        { content }
         { detailsElem }
       </section>
     );
@@ -63,7 +70,7 @@ class App extends Component {
   }
 
   fetchCharacters() {
-    this.setState({ isLoading: true });
+    this.setState({ isLoading: true, hasError: false });
 
     return this.marvelService.getCharacters({
       nameStartsWith: this.state.searchTerm,
@@ -73,7 +80,10 @@ class App extends Component {
         isLoading: false,
         canLoadMore: data.total > (data.offset + data.count),
       }))
-      .catch((err) => console.error(err));
+      .catch((err) => {
+        console.error(err);
+        this.setState({ hasError: true });
+      });
   }
 
   fetchMoreCharacters(config = {}) {
@@ -86,7 +96,10 @@ class App extends Component {
         isLoading: false,
         canLoadMore: data.total > (data.offset + data.count),
       }))
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.error(err);
+        this.setState({ hasError: true });
+      });
   }
 
   fetchCharacter(id, config = {}) {

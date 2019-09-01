@@ -76,13 +76,23 @@
 }
 
 .no-characters,
-.loading {
+.loading,
+.error {
   width: 100%;
   padding: 3rem;
   color: #efefef;
-  font-size: 2rem;
-  text-shadow: 0 0.2rem 0.2rem rgba(0, 0, 0, 0.5);
   text-align: center;
+}
+
+.no-characters h1,
+.loading h1,
+.error h1 {
+  font-size: 2.4rem;
+  text-shadow: 0 0.2rem 0.2rem rgba(0, 0, 0, 0.5);
+}
+
+.error h1 {
+  color: #eb2f06;
 }
 
 .load-more {

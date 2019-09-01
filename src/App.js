@@ -271,7 +271,7 @@ class App extends Component {
     this.setState({ isLoading: true, hasError: false });
 
     this.marvelService.getComics({ titleStartsWith: this.state.searchTerm })
-      .then((data) => console.log(data) || this.setState({
+      .then((data) => this.setState({
         results: data.results,
         isLoading: false,
         canLoadMore: data.total > (data.offset + data.count),

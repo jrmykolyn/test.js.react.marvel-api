@@ -1,8 +1,90 @@
+/*
+// --------------------------------------------------
+// APP STYLES
+// --------------------------------------------------
+*/
 .app {
   max-width: 90rem;
   margin: 0 auto;
 }
 
+/*
+// --------------------------------------------------
+// SearchBar STYLES
+// --------------------------------------------------
+*/
+.search-bar {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 3rem;
+  box-shadow: 0 1rem 2rem -0.3rem rgba(0, 0, 0, 0.5);
+}
+
+.search-bar__field {
+  background: #efefef;
+  border: 0;
+  padding: 1.5rem;
+  font-size: 2rem;
+  flex-grow: 1;
+}
+
+.search-bar__submit {
+  flex-grow: 1;
+  border: 0;
+  font-size: 1.6rem;
+  font-weight: 600;
+  padding: 2rem 2.5rem;
+  color: #fff;
+  background: #3B3B98;
+}
+
+@media (min-width: 768px) {
+  .search-bar__submit {
+    flex-grow: 0;
+  }
+}
+
+/*
+// --------------------------------------------------
+// SearchTypeControls STYLES
+// --------------------------------------------------
+*/
+.search-type-controls {
+  background: #ddd;
+  display: flex;
+  align-items: center;
+  padding: 1.5rem 1rem;
+}
+
+.search-type-controls label {
+  cursor: pointer;
+  padding: 0 1rem;
+  font-weight: 700;
+}
+
+.search-type-controls input[type="radio"] {
+  display: none;
+}
+
+.search-type-controls span {
+  display: block;
+  color: #444;
+  padding-top: 0.5rem;
+  padding-bottom: 0.3rem;
+  border-bottom: solid 0.2rem transparent;
+}
+
+.search-type-controls input[type="radio"]:checked + span {
+  color: #3B3B98;
+  border-bottom-color: #3B3B98;
+}
+
+/*
+// --------------------------------------------------
+// ResultList STYLES
+// --------------------------------------------------
+*/
 .results-list {
   display: flex;
   flex-direction: row;
@@ -10,6 +92,11 @@
   flex-wrap: wrap;
 }
 
+/*
+// --------------------------------------------------
+// ResultCard STYLES
+// --------------------------------------------------
+*/
 .result-card {
   flex: 0 0 48%;
   display: flex;
@@ -67,52 +154,26 @@
   padding-top: 150%;
 }
 
-.search-bar {
-  width: 100%;
-  display: flex;
-  flex-wrap: wrap;
-  margin-bottom: 3rem;
-  box-shadow: 0 1rem 2rem -0.3rem rgba(0, 0, 0, 0.5);
+@media (min-width: 768px) {
+  .result-card {
+    flex: 0 0 32%;
+    margin-right: 2%;
+  }
+
+  .result-card:nth-child(2n) {
+    margin-right: 2%;
+  }
+
+  .result-card:nth-child(3n) {
+    margin-right: 0;
+  }
 }
 
-.search-bar__field {
-  background: #efefef;
-  border: 0;
-  padding: 1.5rem;
-  font-size: 2rem;
-  flex-grow: 1;
-}
-
-.search-bar__submit {
-  flex-grow: 1;
-  border: 0;
-  font-size: 1.6rem;
-  font-weight: 600;
-  padding: 2rem 2.5rem;
-  color: #fff;
-  background: #3B3B98;
-}
-
-.no-results,
-.loading,
-.error {
-  width: 100%;
-  padding: 3rem;
-  color: #efefef;
-  text-align: center;
-}
-
-.no-results h1,
-.loading h1,
-.error h1 {
-  font-size: 2.4rem;
-  text-shadow: 0 0.2rem 0.2rem rgba(0, 0, 0, 0.5);
-}
-
-.error h1 {
-  color: #eb2f06;
-}
-
+/*
+// --------------------------------------------------
+// LoadMore STYLES
+// --------------------------------------------------
+*/
 .load-more {
   display: block;
   min-width: 20rem;
@@ -128,6 +189,11 @@
   line-height: 4.4rem;
 }
 
+/*
+// --------------------------------------------------
+// ResultDetails STYLES
+// --------------------------------------------------
+*/
 .result-details {
   width: 100%;
   height: 100%;
@@ -228,51 +294,27 @@
   transform: translate(-50%, -50%) rotate(-45deg);
 }
 
-@media (min-width: 768px) {
-  .search-bar__submit {
-    flex-grow: 0;
-  }
-
-  .result-card {
-    flex: 0 0 32%;
-    margin-right: 2%;
-  }
-
-  .result-card:nth-child(2n) {
-    margin-right: 2%;
-  }
-
-  .result-card:nth-child(3n) {
-    margin-right: 0;
-  }
+/*
+// --------------------------------------------------
+// NoResults, Error, and Loading STYLES
+// --------------------------------------------------
+*/
+.no-results,
+.loading,
+.error {
+  width: 100%;
+  padding: 3rem;
+  color: #efefef;
+  text-align: center;
 }
 
-.search-type-controls {
-  background: #ddd;
-  display: flex;
-  align-items: center;
-  padding: 1.5rem 1rem;
+.no-results h1,
+.loading h1,
+.error h1 {
+  font-size: 2.4rem;
+  text-shadow: 0 0.2rem 0.2rem rgba(0, 0, 0, 0.5);
 }
 
-.search-type-controls label {
-  cursor: pointer;
-  padding: 0 1rem;
-  font-weight: 700;
-}
-
-.search-type-controls input[type="radio"] {
-  display: none;
-}
-
-.search-type-controls span {
-  display: block;
-  color: #444;
-  padding-top: 0.5rem;
-  padding-bottom: 0.3rem;
-  border-bottom: solid 0.2rem transparent;
-}
-
-.search-type-controls input[type="radio"]:checked + span {
-  color: #3B3B98;
-  border-bottom-color: #3B3B98;
+.error h1 {
+  color: #eb2f06;
 }

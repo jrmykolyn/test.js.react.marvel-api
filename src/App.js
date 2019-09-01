@@ -4,6 +4,7 @@ import { CharacterList } from './components/CharacterList';
 import { CharacterDetails } from './components/CharacterDetails';
 import { SearchBar } from './components/SearchBar';
 import { Error } from './components/Error';
+import { LoadMore } from './components/LoadMore';
 import { MarvelService } from './services/MarvelService';
 
 class App extends Component {
@@ -48,6 +49,10 @@ class App extends Component {
         />
       );
 
+    const loadMore = this.state.canLoadMore && !this.state.error
+      ? <LoadMore onClick={ this.fetchMoreCharacters } />
+      : '';
+
     return (
       <section>
         <SearchBar
@@ -55,6 +60,7 @@ class App extends Component {
           onSubmit={ (searchTerm) => this.setState({ searchTerm })}
         />
         { content }
+        { loadMore }
         { detailsElem }
       </section>
     );

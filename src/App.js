@@ -277,7 +277,7 @@ class App extends Component {
         canLoadMore: data.total > (data.offset + data.count),
       }))
       .catch((err) => {
-        console.log(err);
+        console.error(err);
         this.setState({ isLoading: false, hasError: true });
       });
   }
@@ -295,7 +295,7 @@ class App extends Component {
         canLoadMore: data.total > (data.offset + data.count),
       }))
       .catch((err) => {
-        console.log(err);
+        console.error(err);
         this.setState({ isLoading: false, hasError: true });
       });
   }

@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 export class MarvelService {
   static get ENDPOINTS() {
     return {
@@ -25,23 +27,15 @@ export class MarvelService {
     const params = this.encodeParams({ ...config, ...this.getAuthConfig() });
     const endpoint = MarvelService.ENDPOINTS.characters + '?' + params;
 
-    return window.fetch(endpoint)
-      .then((response) => response.json())
-      .then((parsedResponse) => parsedResponse.data)
-      .then((data) => {
-        return data;
-      });
+    return axios.get(endpoint)
+      .then((response) => response.data.data);
   }
 
   getCharacter(id, config = {}) {
     const params = this.encodeParams({ ...config, ...this.getAuthConfig() });
     const endpoint = MarvelService.ENDPOINTS.character + '/'  + id + '?' + params;
 
-    return window.fetch(endpoint)
-      .then((response) => response.json())
-      .then((parsedResponse) => parsedResponse.data)
-      .then((data) => {
-        return data;
-      });
+    return axios.get(endpoint)
+      .then((response) => response.data.data);
   }
 }
